@@ -1,0 +1,61 @@
+version: "3.5"
+
+networks:
+  microservices-network:
+    driver: bridge
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 55
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - microservices-network
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 10s
+      retries: 5
+
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - microservices-network
+  #clients-persons-service:
+  #  build: ./clients-persons-service
+  #  container_name: clients-persons-service
+  #  depends_on:
+  #    - postgres
+  #    - rabbitmq
+  #  environment:
+  #    SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/sofkaMicroservice
+  #    SPRING_DATASOURCE_USERNAME: postgres
+  #    SPRING_DATASOURCE_PASSWORD: 55
+  #  ports:
+  #    - "8081:8081"
+#
+  #accounts-movements-service:
+  #  build: ./accounts-movements-service
+  #  container_name: accounts-movements-service
+  #  depends_on:
+  #    - postgres
+  #    - rabbitmq
+  #    - clients-persons-service
+  #  environment:
+  #    SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/sofkaMicroservice
+  #    SPRING_DATASOURCE_USERNAME: postgres
+  #    SPRING_DATASOURCE_PASSWORD: 55
+  #  ports:
+  #    - "8082:8082"
+volumes:
+  postgres_data:
+    driver: local
