@@ -1,4 +1,4 @@
-# Sofka Spring Boot Microservices
+# Devsu Spring Boot Microservices
 
 Este proyecto es un conjunto de microservicios desarrollados con **Spring Boot**, **Spring Cloud** y **Docker**, que gestionan cuentas y transacciones bancarias, autenticación y mensajería con RabbitMQ.
 
@@ -20,8 +20,8 @@ Este proyecto es un conjunto de microservicios desarrollados con **Spring Boot**
 
 ### **1️⃣ Clonar el repositorio**
 ```bash
-https://github.com/dchalops/sofka.git
-cd sofka-spring-boot-microservices
+https://github.com/dchalops/devsu.git
+cd devsu-spring-boot-microservices
 ```
 
 ### **2️⃣ Configurar Variables de Entorno**
